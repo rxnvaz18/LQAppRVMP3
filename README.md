@@ -26,4 +26,4 @@ A new and improved book reading list to track your literature consumption. Like 
 This LitQuest App version 2.0 has been created by Roxana Vazquez
 
 ## Acknowledgements
-LitQuest version 2.0 is a project submitted by Roxana for their final SDSU Coding bootcamp milestone project. With the help of all of Thrive DX's instructors the course content allowed for Roxana to develop a stylish and functional book reading app with inspiration taken from Good Reads. 
+LitQuest version 2.0 is a project submitted by Roxana for their final SDSU Coding bootcamp milestone project. With the help of all of Thrive DX's instructors and the course content, Roxana was able to develop a stylish and functional book reading app with inspiration taken from Good Reads. 
