@@ -3,7 +3,7 @@ A new and improved book reading list to track your literature consumption. Like 
 
 ## Table of Contents
 - [Installation](#installation)
--[Usage](#usage)
+- [Usage](#usage)
 - [Author](#author)
 - [Acknowledgements](#acknowledgements)
 
