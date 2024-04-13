@@ -1,0 +1,7 @@
+yarn.lock
+.env
+.db
+/build
+/dist
+node_modules
+.log
