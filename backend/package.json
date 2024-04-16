@@ -1,9 +1,29 @@
 {
+  "name": "backend",
   "devDependencies": {
     "@types/express": "^4.17.21",
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "express": "^4.19.2"
-  }
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.3.1"
+  },
+  "scripts": {
+    "start": "nodemon server.ts"
+  },
+  "version": "1.0.0",
+  "main": "dist/server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rxnvaz18/LQAppRVMP3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rxnvaz18/LQAppRVMP3/issues"
+  },
+  "homepage": "https://github.com/rxnvaz18/LQAppRVMP3#readme",
+  "description": ""
 }
