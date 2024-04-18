@@ -1,9 +1,8 @@
-import "dotenv/config"
+import app from "./app"
 import mongoose from "mongoose"
-import express from 'express'
+
 
 // APP SETUP
-const app = express()
 const port = process.env.PORT
 
 // MONGOOSE CONNECTION & STARTING SERVER
@@ -14,8 +13,5 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING!)
     console.log("Server running on port:" + port)
     })
 })
-// ENDPOINTS
-app.get("/", (req, res) => {
-    res.send("I'm Awake!")
-})
+.catch(console.error)
 
