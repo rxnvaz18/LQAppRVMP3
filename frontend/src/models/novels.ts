@@ -1,4 +1,4 @@
-export interface NovelReview {
+export interface Novel {
     _id: string,
     title: string,
     text?: string,

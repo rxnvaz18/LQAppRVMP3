@@ -1,17 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from "react"
+import { Novel as NovelReview } from "./models/novels"
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import BookSearch from './components/BookSearch';
 import Bookshelf from './components/BookShelf';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Assuming you're using Bootstrap for styling
-import { Navbar, Nav } from 'react-bootstrap';
-import './App.css';
+import { Navbar, Nav, Col, Container, Row } from 'react-bootstrap';
+import Novel from "./components/Novel";
+import "./styles/global.css"
 
 function App() {
+
+  const [novels, setNovels] = useState<NovelReview[]>([])
+
+useEffect(() => {
+    async function loadNovels() { 
+        try {
+            const response = await fetch ("/api/novels", {method: "GET"})
+                const novels = await response.json()
+                setNovels(novels)
+        } catch (error) {
+            console.error(error)
+            alert(error)
+        }
+} loadNovels()
+}, [])
+
   return (
     <Router>
-      <div className="App">
-        <Navbar bg="var(--primary-color)" expand="lg" variant="dark">
+        <Container>
+          <Row xs={1} md={2} xl={3} className="g-4">
+        {novels.map(novel => (
+          <Col key={novel._id}>
+          <Novel novel={novel} />
+          </Col>
+        ))}
+        </Row>
+        </Container>
+
+        {/* <Navbar bg="var(--primary-color)" expand="lg" variant="dark">
           <Navbar.Brand as={Link} to="/">LitQuest</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -26,8 +53,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/search" element={<BookSearch />} />
           <Route path="/bookshelf" element={<Bookshelf />} />
-        </Routes>
-      </div>
+        </Routes> */}
     </Router>
   );
 }

@@ -14,7 +14,7 @@ import { router as bookshelfRouter } from './controllers/bookShelf';
 // Enable all CORS requests
 app.use(cors());
 app.use(json());
-app.use('/bookshelf', bookshelfRouter)
+app.use('/api/novels/bookshelf', bookshelfRouter)
 
 // MongoDB connection string
 const uri = process.env.REACT_APP_MONGODB_URI!;
