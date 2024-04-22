@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signUp = void 0;
+exports.login = exports.signUp = void 0;
 const User_1 = __importDefault(require("../models/User"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const signUp = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -45,3 +45,26 @@ const signUp = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.signUp = signUp;
+const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const username = req.body.username;
+    const password = req.body.password;
+    try {
+        if (!username || !password) {
+            throw Error("Parameters missing");
+        }
+        const user = yield User_1.default.findOne({ username: username }).select("+password +email").exec();
+        if (!user) {
+            throw Error("Invalid credentials");
+        }
+        const passwordMatch = yield bcrypt_1.default.compare(password, user.password);
+        if (!passwordMatch) {
+            throw Error("Invalid credentials");
+        }
+        req.session.userId = user._id;
+        res.status(201).json(user);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+exports.login = login;

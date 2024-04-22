@@ -39,6 +39,7 @@ const express_1 = __importStar(require("express"));
 const axios_1 = __importDefault(require("axios"));
 const mongoose_1 = require("mongoose");
 const cors_1 = __importDefault(require("cors")); // Import CORS module
+const validateEnv_1 = __importDefault(require("./util/validateEnv"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -49,9 +50,9 @@ app.use((0, cors_1.default)());
 app.use((0, express_1.json)());
 app.use('/api/novels/bookshelf', bookShelf_1.router);
 // MongoDB connection string
-const uri = process.env.REACT_APP_MONGODB_URI;
+const uri = validateEnv_1.default.REACT_APP_MONGODB_URI;
 // Google Books API key
-const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
+const apiKey = validateEnv_1.default.GOOGLE_BOOKS_API_KEY;
 // Connect to MongoDB
 (0, mongoose_1.connect)(uri)
     .then(() => console.log('MongoDB connection successful'))

@@ -44,3 +44,35 @@ export const signUp: RequestHandler<unknown, unknown, SignUpBody, unknown> = asy
         next(error)
     }
 }
+
+interface LoginBody {
+    username?: string,
+    password?: string,
+}
+
+export const login: RequestHandler<unknown, unknown, LoginBody, unknown> = async (req, res, next) => {
+    const username = req.body.username
+    const password = req.body.password
+
+    try {
+        if (!username || !password) {
+            throw Error("Parameters missing")
+        }
+    const user = await UserModel.findOne({username: username}).select("+password +email").exec()
+    
+    if (!user) {
+        throw Error("Invalid credentials")
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password)
+    if (!passwordMatch) {
+        throw Error("Invalid credentials")
+    }
+
+    req.session.userId = user._id
+    res.status(201).json(user)
+    
+    } catch(error) {
+        next(error)
+    }
+}
