@@ -1,5 +1,5 @@
 # LQAppRVMP3
-A new and improved book reading list to track your literature consumption. Like a virtual bookshelp it has been pdated with a login feature and tier list based on volume of books read.
+A new and improved book reading list to track your literature consumption. Like a virtual bookshelf it has been updated with a login feature and tier list based on volume of books read.
 
 ## Table of Contents
 - [Installation](#installation)
