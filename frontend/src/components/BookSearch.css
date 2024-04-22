@@ -1,0 +1,21 @@
+:root {
+    --primary-color: #136942ff;
+    --secondary-color:#FAFFF4;
+    --third-color: #FFE25Fff;
+  }
+  .BookSearchTitle {
+    color: var(--secondary-color);
+    font-family: 'Noto Serif', serif;
+    font-weight:bold;
+  }
+  .book-search-container {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    min-height: 100%;
+    padding: 20px;
+  }
+
+body {
+  background-color: var(--primary-color);
+  margin: 0; /* Remove default margin */
+}

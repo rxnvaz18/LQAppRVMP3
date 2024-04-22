@@ -1,0 +1,110 @@
+:root {
+    --primary-color: #136942ff;
+    --secondary-color:#FAFFF4;
+    --third-color: #FFE25Fff;
+  }
+  .navbar {
+    background-color: var(--primary-color);
+  }
+  .start-page {
+      text-align: center;
+      padding-top: 0px; /* Adjust as needed for your layout */
+      background-color: var(--secondary-color);
+    }
+    
+    .start-page h1 {
+      margin-top: 20px;
+      color: var(--primary-color);
+      font-family: 'Noto Serif', serif;
+      font-weight:bold;
+    text-align: center;
+    padding-top: 50px; /* Adjust as needed for your layout */
+  }
+  
+  .start-page .logo img {
+    width: 30vw; /* 30% of the viewport width */
+    height: auto; /* maintain the aspect ratio */
+    max-width: 100%; /* ensure it doesn't overflow its container */
+  }
+  
+  .start-page h1 {
+    margin-top: 20px;
+    font-size: 2.5vw; /* responsive font size, adjusts with the width of the viewport */
+  }
+  
+  .start-page p {
+    margin: 10px 0;
+    font-size: 1.5vw; /* responsive font size, adjusts with the width of the viewport */
+  }
+  
+  .start-buttons {
+    margin-top: 30px;
+  }
+  
+  .start-buttons .btn {
+    margin: 10px;
+    padding: 1vw 2vw; /* responsive padding, adjusts with the width of the viewport */
+    font-size: 1.2vw; /* responsive font size, adjusts with the width of the viewport */
+    /* Add other button styles here */
+  }
+  
+  .start-buttons .btn-primary {
+    background-color: green;
+    border: none;
+  }
+  
+  .start-buttons .btn-outline-primary {
+    background-color: transparent;
+    border: 2px solid green;
+    color: green;
+  }
+  
+  .start-buttons .btn-primary:hover,
+  .start-buttons .btn-outline-primary:hover {
+    opacity: 0.8;
+  }
+  
+  /* Media queries for larger screens */
+  @media (min-width: 600px) {
+    .start-page .logo img {
+      max-width: 180px; /* example max-width, adjust as needed */
+    }
+    .start-page h1 {
+      font-size: 24px; /* fixed font size for larger screens */
+    }
+    .start-page p {
+      margin: 10px 0;
+      color: var(--primary-color);
+      /* Add styles for your paragraph elements here */
+      font-size: 18px; /* fixed font size for larger screens */
+    }
+    .start-buttons .btn {
+      padding: 10px 20px; /* fixed padding for larger screens */
+      font-size: 16px; /* fixed font size for larger screens */
+    }
+    
+    /* Since it's a React app, you might also want to style the Link components */
+    .start-buttons .btn-primary {
+      background-color: var(--primary-color);
+      border: none;
+    }
+    
+    .start-buttons .btn-outline-primary {
+      background-color: transparent;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+  }
+  
+  /* Media queries for smaller screens */
+  @media (max-width: 599px) {
+    .start-page {
+      padding-top: 20px; /* adjust padding for smaller screens */
+    }
+    .start-page .logo img {
+      max-width: 100px; /* example max-width for smaller screens */
+    }
+    .start-page h1 {
+      font-size: 20px; /* fixed font size for smaller screens */
+    }
+  }
+  }

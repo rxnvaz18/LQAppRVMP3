@@ -1,11 +1,12 @@
-import express, { Request, Response } from 'express';
-import Book, { Book as BookInterface } from '../models/Books';
-
+// Bookshelf.js
+import express from 'express'; 
+import Book from '../models/Books.js'; // Import the Book model
 export const router = express.Router();
 
+
 // Endpoint to add a book to the bookshelf
-router.post('/add', async (req: Request, res: Response) => {
-    const { title, description, image }: BookInterface = req.body;
+router.post('/add', async (req, res) => {
+    const { title, description, image } = req.body; // Assuming 'title' can be used as a unique identifier
 
     try {
         // Check if a book with the same title already exists
@@ -26,9 +27,9 @@ router.post('/add', async (req: Request, res: Response) => {
 });
 
 // Endpoint to update the read status of a book
-router.put('/update/:id', async (req: Request, res: Response) => {
+router.put('/update/:id', async (req, res) => {
     const { id } = req.params;
-    const { readStatus }: Pick<BookInterface, 'readStatus'> = req.body;
+    const { readStatus } = req.body;
 
     try {
         const updatedBook = await Book.findByIdAndUpdate(id, { readStatus }, { new: true });
@@ -43,7 +44,7 @@ router.put('/update/:id', async (req: Request, res: Response) => {
 });
 
 // Endpoint to get all books in the bookshelf
-router.get('/all', async (req: Request, res: Response) => {
+router.get('/all', async (req, res) => {
     try {
         const books = await Book.find({});
         res.json(books);
@@ -53,8 +54,7 @@ router.get('/all', async (req: Request, res: Response) => {
     }
 });
 
-// Endpoint to delete a book from the bookshelf
-router.delete('/delete/:id', async (req: Request, res: Response) => {
+router.delete('/delete/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const deletedBook = await Book.findByIdAndDelete(id);
@@ -66,4 +66,4 @@ router.delete('/delete/:id', async (req: Request, res: Response) => {
         console.error('Error deleting book:', error);
         res.status(500).send('Error deleting book');
     }
-});
+})
