@@ -138,7 +138,7 @@ function BookSearch() {
                         <Row xs={1} md={2} lg={3} className="g-4">
                             {searchResults.map((item, index) => (
                                 <Col key={index}>
-                                    <Card style={{ marginBottom: '1rem', backgroundColor: 'var()' }} onClick={() => toggleExpand(index)}>
+                                    <Card style={{ marginBottom: '1rem', backgroundColor: 'var(--primary-color)' }} onClick={() => toggleExpand(index)}>
                                         {/* <Card.Img variant="top" src={item.volumeInfo.imageLinks?.thumbnail} alt={item.volumeInfo.title} style={{ minHeight: '20%', height: '20%', maxheight: '20%', objectFit: 'contain' }} /> */}
                                         <Card.Img variant="top" src={`https://books.google.com/books/publisher/content/images/frontcover/${item.id}?fife=w400-h600&source=gbs_api`} alt={item.volumeInfo.title} style={{ minHeight: '20%', height: '20%', maxHeight: '20%', objectFit: 'contain' }} />
                                         <Card.Body >

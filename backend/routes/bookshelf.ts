@@ -1,7 +1,8 @@
 import express, { Request, Response } from 'express';
 import Book, { Book as BookInterface } from '../models/Books';
+import * as bookshelfController from "../controllers/bookShelf"
 
-export const router = express.Router();
+const router = express.Router();
 
 // Endpoint to add a book to the bookshelf
 router.post('/add', async (req: Request, res: Response) => {
@@ -67,3 +68,5 @@ router.delete('/delete/:id', async (req: Request, res: Response) => {
         res.status(500).send('Error deleting book');
     }
 });
+
+export default router
