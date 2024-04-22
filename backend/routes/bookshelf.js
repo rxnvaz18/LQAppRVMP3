@@ -12,12 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.router = void 0;
 const express_1 = __importDefault(require("express"));
 const Books_1 = __importDefault(require("../models/Books"));
-exports.router = express_1.default.Router();
+const router = express_1.default.Router();
 // Endpoint to add a book to the bookshelf
-exports.router.post('/add', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/add', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { title, description, image } = req.body;
     try {
         // Check if a book with the same title already exists
@@ -36,7 +35,7 @@ exports.router.post('/add', (req, res) => __awaiter(void 0, void 0, void 0, func
     }
 }));
 // Endpoint to update the read status of a book
-exports.router.put('/update/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.put('/update/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const { readStatus } = req.body;
     try {
@@ -52,7 +51,7 @@ exports.router.put('/update/:id', (req, res) => __awaiter(void 0, void 0, void 0
     }
 }));
 // Endpoint to get all books in the bookshelf
-exports.router.get('/all', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/all', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const books = yield Books_1.default.find({});
         res.json(books);
@@ -63,7 +62,7 @@ exports.router.get('/all', (req, res) => __awaiter(void 0, void 0, void 0, funct
     }
 }));
 // Endpoint to delete a book from the bookshelf
-exports.router.delete('/delete/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.delete('/delete/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
         const deletedBook = yield Books_1.default.findByIdAndDelete(id);
@@ -77,3 +76,4 @@ exports.router.delete('/delete/:id', (req, res) => __awaiter(void 0, void 0, voi
         res.status(500).send('Error deleting book');
     }
 }));
+exports.default = router;

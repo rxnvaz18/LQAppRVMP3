@@ -47,7 +47,7 @@ const bookShelf_1 = require("./controllers/bookShelf");
 // Enable all CORS requests
 app.use((0, cors_1.default)());
 app.use((0, express_1.json)());
-app.use('/bookshelf', bookShelf_1.router);
+app.use('/api/novels/bookshelf', bookShelf_1.router);
 // MongoDB connection string
 const uri = process.env.REACT_APP_MONGODB_URI;
 // Google Books API key

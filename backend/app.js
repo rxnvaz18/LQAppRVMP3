@@ -5,10 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv/config");
 const express_1 = __importDefault(require("express"));
+const Users_1 = __importDefault(require("./routes/Users"));
 const novels_1 = __importDefault(require("./routes/novels"));
+const bookshelf_1 = __importDefault(require("./routes/bookshelf"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
+app.use("/api/users", Users_1.default);
 app.use("/api/novels", novels_1.default);
+app.use("/api/bookshelf", bookshelf_1.default);
 app.use((req, res, next) => {
     next(Error("Endpoint not found"));
 });
