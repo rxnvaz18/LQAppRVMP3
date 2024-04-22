@@ -37,6 +37,7 @@ const signUp = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
             email: email,
             password: passwordHashed,
         });
+        req.session.userId = newUser._id;
         res.status(201).json(newUser);
     }
     catch (error) {

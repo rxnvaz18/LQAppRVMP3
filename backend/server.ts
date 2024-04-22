@@ -2,6 +2,7 @@ import express, { json } from 'express';
 import axios from 'axios';
 import { connect, Schema, model } from 'mongoose';
 import cors from 'cors'; // Import CORS module
+import env from "./util/validateEnv"
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -17,10 +18,10 @@ app.use(json());
 app.use('/api/novels/bookshelf', bookshelfRouter)
 
 // MongoDB connection string
-const uri = process.env.REACT_APP_MONGODB_URI!;
+const uri = env.REACT_APP_MONGODB_URI!;
 
 // Google Books API key
-const apiKey = process.env.GOOGLE_BOOKS_API_KEY!;
+const apiKey = env.GOOGLE_BOOKS_API_KEY!;
 
 // Connect to MongoDB
 connect(uri)
