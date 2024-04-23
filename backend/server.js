@@ -21,7 +21,15 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const app_1 = __importDefault(require("./app"));
 const mongoose_2 = __importDefault(require("mongoose"));
-const port = validateEnv_1.default.PORT;
+const bookShelf_1 = require("./controllers/bookShelf");
+// Enable all CORS requests
+app_1.default.use((0, cors_1.default)());
+app_1.default.use((0, express_1.json)());
+app_1.default.use('/api/novels/bookshelf', bookShelf_1.router);
+// environmental variables
+const port = process.env.PORT || 5000;
+const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
+const sessionSecret = process.env.SESSION_SECRET;
 mongoose_2.default.connect(validateEnv_1.default.REACT_APP_MONGODB_URI)
     .then(() => {
     console.log("Mongoose connected");
@@ -30,13 +38,6 @@ mongoose_2.default.connect(validateEnv_1.default.REACT_APP_MONGODB_URI)
     });
 })
     .catch(console.error);
-const bookShelf_1 = require("./controllers/bookShelf");
-// Enable all CORS requests
-app_1.default.use((0, cors_1.default)());
-app_1.default.use((0, express_1.json)());
-app_1.default.use('/api/novels/bookshelf', bookShelf_1.router);
-// Google Books API key
-const apiKey = validateEnv_1.default.GOOGLE_BOOKS_API_KEY;
 const searchSchema = new mongoose_1.Schema({
     query: String,
     books: [{

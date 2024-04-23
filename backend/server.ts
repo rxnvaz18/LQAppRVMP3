@@ -8,8 +8,16 @@ import dotenv from 'dotenv';
 dotenv.config();
 import app from "./app";
 import mongoose from "mongoose";
+import { router as bookshelfRouter } from './controllers/bookShelf';
+// Enable all CORS requests
+app.use(cors());
+app.use(json());
+app.use('/api/novels/bookshelf', bookshelfRouter)
 
-const port = env.PORT;
+// environmental variables
+const port = process.env.PORT || 5000;
+const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
+const sessionSecret = process.env.SESSION_SECRET;
 
 mongoose.connect(env.REACT_APP_MONGODB_URI)
     .then(() => {
@@ -19,15 +27,6 @@ mongoose.connect(env.REACT_APP_MONGODB_URI)
         });
     })
     .catch(console.error);
-
-import { router as bookshelfRouter } from './controllers/bookShelf';
-// Enable all CORS requests
-app.use(cors());
-app.use(json());
-app.use('/api/novels/bookshelf', bookshelfRouter)
-
-// Google Books API key
-const apiKey = env.GOOGLE_BOOKS_API_KEY!;
 
 // Define a Mongoose schema for the search results
 interface Book {

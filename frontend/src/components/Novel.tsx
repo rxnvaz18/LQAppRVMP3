@@ -6,6 +6,9 @@ import {Novel as NovelReview} from "../models/novels"
 
 interface NovelProps {
     novel: NovelReview,
+    onNovelClicked: (novel: NovelReview) => void;
+    onDeleteNovelClicked: (novel: NovelReview) => Promise<void>;
+    className?: string;
 }
 const Novel = ({novel}: NovelProps) => {
     const {

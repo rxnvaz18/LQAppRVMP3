@@ -18,9 +18,6 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const getAuthenticatedUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const authenticatedUserId = req.session.userId;
     try {
-        if (!authenticatedUserId) {
-            throw Error("User note authenticated");
-        }
         const user = yield User_1.default.findById(authenticatedUserId).select("+email").exec();
         res.status(200).json(user);
     }
