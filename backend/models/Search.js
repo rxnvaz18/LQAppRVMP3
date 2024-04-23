@@ -1,32 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = require("express");
-const cors_1 = __importDefault(require("cors")); // Import CORS module
-const validateEnv_1 = __importDefault(require("./util/validateEnv"));
-const dotenv_1 = __importDefault(require("dotenv"));
-const app_1 = __importDefault(require("./app"));
-const mongoose_1 = __importDefault(require("mongoose"));
-const bookShelf_1 = require("./controllers/bookShelf");
-dotenv_1.default.config();
-// Enable all CORS requests
-app_1.default.use((0, cors_1.default)());
-app_1.default.use((0, express_1.json)());
-app_1.default.use('/api/novels/bookshelf', bookShelf_1.router);
-// environmental variables
-const PORT = validateEnv_1.default.PORT || 5000;
-const apiKey = validateEnv_1.default.GOOGLE_BOOKS_API_KEY;
-const sessionSecret = validateEnv_1.default.SESSION_SECRET;
-mongoose_1.default.connect(validateEnv_1.default.MONGODB_CONNECTION_STRING)
-    .then(() => {
-    console.log("Mongoose connected");
-    app_1.default.listen(PORT, () => {
-        console.log("Server running on port: " + PORT);
-    });
-})
-    .catch(console.error);
+// import axios from 'axios'
+// import { Schema, model } from 'mongoose'
+// import app from "../app"
 // // Define a Mongoose schema for the search results
 // interface Book {
 //     title: string;
@@ -68,6 +43,3 @@ mongoose_1.default.connect(validateEnv_1.default.MONGODB_CONNECTION_STRING)
 //       res.status(500).send('Error fetching books');
 //     }
 //   });
-app_1.default.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});

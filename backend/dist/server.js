@@ -17,8 +17,8 @@ app_1.default.use((0, express_1.json)());
 app_1.default.use('/api/novels/bookshelf', bookShelf_1.router);
 // environmental variables
 const PORT = validateEnv_1.default.PORT || 5000;
-const apiKey = validateEnv_1.default.GOOGLE_BOOKS_API_KEY;
-const sessionSecret = validateEnv_1.default.SESSION_SECRET;
+// const apiKey = env.GOOGLE_BOOKS_API_KEY;
+// const sessionSecret = env.SESSION_SECRET;
 mongoose_1.default.connect(validateEnv_1.default.MONGODB_CONNECTION_STRING)
     .then(() => {
     console.log("Mongoose connected");

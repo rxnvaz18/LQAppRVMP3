@@ -12,6 +12,7 @@ import * as NovelsApi from "./network/novels_api"
 import 'bootstrap/dist/css/bootstrap.min.css' // Assuming you're using Bootstrap for styling
 import { Navbar, Nav, Col, Container, Row } from 'react-bootstrap'
 import Novel from "./components/Novel"
+import './global.css';
 
 
 function App() {
