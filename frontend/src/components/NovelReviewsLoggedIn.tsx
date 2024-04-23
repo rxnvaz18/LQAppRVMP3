@@ -3,7 +3,7 @@ import { Button, Col, Row, Spinner } from "react-bootstrap"
 import { FaPlus } from "react-icons/fa"
 import { Novel as NovelReview } from '../models/novels'
 import * as NovelsApi from "../network/novels_api"
-import styles from "../styles/novelsreviews.module.css"
+import styles from "../styles/NovelsPage.module.css"
 import styleUtils from "../styles/utils.module.css"
 import AddEditNovelDialog from "./AddEditNovelReviews"
 import Novel from './Novel'

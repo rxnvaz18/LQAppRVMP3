@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react"
-import { Novel as NovelReview } from "./models/novels"
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import LandingPage from './components/LandingPage'
-import BookSearch from './components/BookSearch'
-import Bookshelf from './components/BookShelf'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import NovelsPage from "./pages/NovelsPage"
+import NotFoundPage from "./pages/NotFoundPage"
+import PrivacyPage from "./pages/PrivacyPage"
 import LoginModal from './components/LoginModal'
 import NavBar from './components/NavBar'
 import SignUpModal from './components/SignUpModal'
@@ -11,8 +10,7 @@ import { User } from './models/user'
 import * as NovelsApi from "./network/novels_api"
 import 'bootstrap/dist/css/bootstrap.min.css' // Assuming you're using Bootstrap for styling
 import { Navbar, Nav, Col, Container, Row } from 'react-bootstrap'
-import Novel from "./components/Novel"
-import './global.css';
+import './styles/utils.module.css';
 
 
 function App() {
@@ -43,7 +41,7 @@ function App() {
 					onSignUpClicked={() => setShowSignUpModal(true)}
 					onLogoutSuccessful={() => setLoggedInUser(null)}
 				/>
-				<Container className={styles.pageContainer}>
+				<Container>
 					<Routes>
 						<Route
 							path='/'

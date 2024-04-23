@@ -1,10 +1,14 @@
 import mongoose from "mongoose";
 import { RequestHandler } from "express";
-import NovelModel from "../models/Novel"
+import Novel from "../models/Novel"
+import { assertIsDefined } from "../util/assertIsDefined"
+import createHttpError from "http-errors";
 
 export const getNovels: RequestHandler = async (req, res, next) => {
+    const authenticatedUserId = req.session.userId
     try {
-        const novels = await NovelModel.find().exec();
+        assertIsDefined(authenticatedUserId)
+        const novels = await Novel.find({userId: authenticatedUserId}).exec();
         res.status(200).json(novels);
     } catch (error) {
         next(error)
@@ -13,15 +17,22 @@ export const getNovels: RequestHandler = async (req, res, next) => {
 
 export const getNovel: RequestHandler = async (req, res, next) => {
     const novelId = req.params.novelId
+    const authenticatedUserId = req.session.userId
+
     try  {
+        assertIsDefined(authenticatedUserId)
+
         if (!mongoose.isValidObjectId(novelId)){
             throw Error("Invalid novel id")
         }
-        const novel = await NovelModel.findById(novelId).exec()
+        const novel = await Novel.findById(novelId).exec()
         if (!novel) {
             throw Error("novel review not found")
-
         }
+        if(!novel.userId.equals(authenticatedUserId)) {
+            throw createHttpError(401, "You cannot access this novel review")
+        }
+
         res.status(200).json(novel)
     }
         catch (error) {
@@ -38,12 +49,15 @@ interface CreateNovelBody {
 export const createNovel: RequestHandler<unknown, unknown, CreateNovelBody, unknown> = async (req, res, next) => {
     const title = req.body.title
     const text = req.body.text
+    const authenticatedUserId = req.session.userId
 
     try { 
+        assertIsDefined(authenticatedUserId)
         if (!title) {
-            throw Error("review must have a title")
+            throw createHttpError(400, "review must have a title")
         }
-        const newNovel = await NovelModel.create({
+        const newNovel = await Novel.create({
+            userId: authenticatedUserId,
             title: title,
             text: text,
         })
@@ -69,7 +83,9 @@ export const updateNovel: RequestHandler<UpdateNovelParams, unknown, UpdateNovel
     const novelId = req.params.novelId
     const newTitle = req.body.title
     const newText = req.body.text
+    const authenticatedUserId = req.session.userId
     try{
+        assertIsDefined(authenticatedUserId)
         if (!mongoose.isValidObjectId(novelId)){
             throw Error("Invalid novel id")
     }
@@ -77,10 +93,14 @@ export const updateNovel: RequestHandler<UpdateNovelParams, unknown, UpdateNovel
         throw Error("review must have a title")
     }
 
-    const novel = await NovelModel.findById(novelId).exec()
+    const novel = await Novel.findById(novelId).exec()
     if (!novel) {
         throw Error("novel review not found")
 
+    }
+
+    if(!novel.userId.equals(authenticatedUserId)) {
+        throw createHttpError(401, "You cannot access this novel review")
     }
     novel.title = newTitle
     novel.text = newText
@@ -96,20 +116,29 @@ export const updateNovel: RequestHandler<UpdateNovelParams, unknown, UpdateNovel
 
 export const deleteNovel: RequestHandler = async(req, res, next) => {
     const novelId = req.params.novelId
+    const authenticatedUserId = req.session.userId
     try {
+        assertIsDefined(authenticatedUserId)
+
         if (!mongoose.isValidObjectId(novelId)){
             throw Error("Invalid novel id")
     }
 
-    const novel = await NovelModel.findById(novelId).exec()
+    const novel = await Novel.findById(novelId).exec()
     if (!novel) {
         throw Error("Novel review not found")
     }
-    const deleteResult = await NovelModel.deleteOne({ _id: novelId });
+    const deleteResult = await Novel.deleteOne({ _id: novelId });
 
         if (deleteResult.deletedCount === 0) {
-            throw new Error("Novel not found");
+            throw createHttpError(401,"Novel not found");
         }
+
+        if(!novel.userId.equals(authenticatedUserId)) {
+            throw createHttpError(401, "You cannot access this novel review")
+        }
+        await novel.deleteOne()
+
         res.sendStatus(204); // Successfully deleted
     } catch(error) {
         next(error)

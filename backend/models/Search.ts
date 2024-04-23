@@ -24,7 +24,7 @@
 //   });
   
 //   // Create a Mongoose model based on the schema
-//   const Search = model<SearchDocument>('Search', searchSchema);
+//   export const Search = model<SearchDocument>('Search', searchSchema);
   
 //   app.get('/api/search', async (req, res) => {
 //     const { query } = req.query;
@@ -43,7 +43,7 @@
 //       }));
   
 //       // Use Mongoose model to save the search results
-//       const newSearch = new Search({ query, books });
+//     const newSearch = new Search({ query, books });
 //       await newSearch.save();
   
 //       res.json(books);
@@ -52,3 +52,5 @@
 //       res.status(500).send('Error fetching books');
 //     }
 //   });
+
+  

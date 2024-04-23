@@ -10,7 +10,7 @@ interface NovelsPageProps {
 
 const NovelsPage = ({ loggedInUser }: NovelsPageProps) => {
     return (
-        <Container className={styles.notesPage}>
+        <Container className={styles.novelsPage}>
             <>
                 {loggedInUser
                     ? <NovelReviewsLoggedIn />
