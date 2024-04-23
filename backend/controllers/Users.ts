@@ -2,6 +2,21 @@ import { RequestHandler } from "express"
 import UserModel from "../models/User"
 import bcrypt from "bcrypt"
 
+export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
+    const authenticatedUserId = req.session.userId
+
+    try {
+        if (!authenticatedUserId) {
+            throw Error("User note authenticated")
+        }
+        const user = await UserModel.findById(authenticatedUserId).select("+email").exec()
+        res.status(200).json(user)
+
+    } catch(error) {
+        next(error)
+    }
+}
+
 interface SignUpBody {
     username?: string,
     email?: string,
@@ -71,8 +86,18 @@ export const login: RequestHandler<unknown, unknown, LoginBody, unknown> = async
 
     req.session.userId = user._id
     res.status(201).json(user)
-    
+
     } catch(error) {
         next(error)
     }
+}
+
+export const logout: RequestHandler = (req, res, next) => {
+    req.session.destroy(error => {
+        if (error) {
+            next(error)
+        } else {
+            res.sendStatus(200)
+        }
+    })
 }

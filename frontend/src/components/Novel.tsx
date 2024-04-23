@@ -3,6 +3,7 @@ import { Card } from "react-bootstrap"
 import {Novel as NovelReview} from "../models/novels"
 
 
+
 interface NovelProps {
     novel: NovelReview,
 }

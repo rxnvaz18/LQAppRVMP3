@@ -7,7 +7,7 @@ import Bookshelf from './components/BookShelf';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Assuming you're using Bootstrap for styling
 import { Navbar, Nav, Col, Container, Row } from 'react-bootstrap';
 import Novel from "./components/Novel";
-import "./styles/global.css"
+
 
 function App() {
 
@@ -37,8 +37,7 @@ useEffect(() => {
         ))}
         </Row>
         </Container>
-
-        {/* <Navbar bg="var(--primary-color)" expand="lg" variant="dark">
+        <Navbar bg="var(--primary-color)" expand="lg" variant="dark">
           <Navbar.Brand as={Link} to="/">LitQuest</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -53,7 +52,7 @@ useEffect(() => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/search" element={<BookSearch />} />
           <Route path="/bookshelf" element={<Bookshelf />} />
-        </Routes> */}
+        </Routes> 
     </Router>
   );
 }

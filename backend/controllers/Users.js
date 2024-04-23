@@ -12,9 +12,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = exports.signUp = void 0;
+exports.logout = exports.login = exports.signUp = exports.getAuthenticatedUser = void 0;
 const User_1 = __importDefault(require("../models/User"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const getAuthenticatedUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const authenticatedUserId = req.session.userId;
+    try {
+        if (!authenticatedUserId) {
+            throw Error("User note authenticated");
+        }
+        const user = yield User_1.default.findById(authenticatedUserId).select("+email").exec();
+        res.status(200).json(user);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+exports.getAuthenticatedUser = getAuthenticatedUser;
 const signUp = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const username = req.body.username;
     const email = req.body.email;
@@ -68,3 +82,14 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.login = login;
+const logout = (req, res, next) => {
+    req.session.destroy(error => {
+        if (error) {
+            next(error);
+        }
+        else {
+            res.sendStatus(200);
+        }
+    });
+};
+exports.logout = logout;
