@@ -1,5 +1,5 @@
 # LQAppRVMP3
-A new and improved book reading list to track your literature consumption. Like a virtual bookshelf it has been updated with a login feature and tier list based on volume of books read.
+A new and improved book reading list to track your literature consumption. Like a virtual bookshelf it has been updated with a login feature and a book review section.
 
 ## Table of Contents
 - [Installation](#installation)
@@ -21,7 +21,7 @@ A new and improved book reading list to track your literature consumption. Like 
 3. Search for a book of your choice within the search bar on the landing page.
 4. Add the book of your choice to your bookshelf.
 5. Embark on your reading journey and check books you have read to update your reading list. 
-6. Click on 'Books Read' to show you books you have read.
+6. After reading a book, add a review or notes in your book reviews section.
 
 ## API Endpoints
 This document outlines the API endpoints provided by the server for managing books in a bookshelf.
