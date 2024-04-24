@@ -1,0 +1,12 @@
+:root {
+    --primary-color: #136942ff;
+    --secondary-color:#FAFFF4;
+    --third-color: #FFE25Fff;
+  }
+
+ .BookshelfTitle {
+    color: var(--secondary-color);
+    font-family: 'Noto Serif', serif;
+    font-weight:bold;
+    text-align: center;
+ }
