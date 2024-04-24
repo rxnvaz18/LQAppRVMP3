@@ -5,7 +5,9 @@ import userRoutes from "./routes/Users"
 import novelsRoutes from "./routes/novels"
 import { requiresAuth } from "./middleware/authMiddleware"
 import cors from "cors"
-import express, { json, NextFunction, Request, Response } from 'express';
+import express, { json, NextFunction, Request, Response } from 'express'
+import { router as bookshelfRouter } from "./controllers/bookShelf"
+import searchRouter from './routes/search';
 
 const app = express()
 
@@ -34,13 +36,21 @@ app.use(session({
   })
 }));
 
+
 app.use("/api/users", userRoutes)
 app.use("/api/novels", requiresAuth, novelsRoutes)
-
+app.use('/bookshelf', requiresAuth, bookshelfRouter)
+app.use('/api/search', searchRouter)
 
 app.use((req, res, next) => {
-    next(Error("Endpoint not found"))
-})
+  next(new Error("Endpoint not found"));
+});
+
+// Global error handler
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err);
+  res.status(404).send(err.message || 'Not Found');
+});
 
 export default app
  

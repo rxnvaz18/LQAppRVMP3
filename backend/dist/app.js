@@ -8,10 +8,11 @@ const express_session_1 = __importDefault(require("express-session"));
 const connect_mongo_1 = __importDefault(require("connect-mongo"));
 const Users_1 = __importDefault(require("./routes/Users"));
 const novels_1 = __importDefault(require("./routes/novels"));
-const bookshelf_1 = __importDefault(require("./routes/bookshelf"));
 const authMiddleware_1 = require("./middleware/authMiddleware");
 const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
+const bookShelf_1 = require("./controllers/bookShelf");
+const search_1 = __importDefault(require("./routes/search"));
 const app = (0, express_1.default)();
 // Middleware to parse json bodies
 app.use(express_1.default.json());
@@ -36,7 +37,8 @@ app.use((0, express_session_1.default)({
 }));
 app.use("/api/users", Users_1.default);
 app.use("/api/novels", authMiddleware_1.requiresAuth, novels_1.default);
-app.use("/api/bookshelf", authMiddleware_1.requiresAuth, bookshelf_1.default);
+app.use('/bookshelf', authMiddleware_1.requiresAuth, bookShelf_1.router);
+app.use('/api/search', search_1.default);
 app.use((req, res, next) => {
     next(Error("Endpoint not found"));
 });

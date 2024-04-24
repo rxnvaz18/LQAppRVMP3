@@ -15,19 +15,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 // Bookshelf.js
 const express_1 = __importDefault(require("express"));
-const Books_js_1 = __importDefault(require("../models/Books.js")); // Import the Book model
+const Books_1 = __importDefault(require("../models/Books")); // Import the Book model
 exports.router = express_1.default.Router();
 // Endpoint to add a book to the bookshelf
 exports.router.post('/add', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { title, description, image } = req.body; // Assuming 'title' can be used as a unique identifier
     try {
         // Check if a book with the same title already exists
-        const existingBook = yield Books_js_1.default.findOne({ title });
+        const existingBook = yield Books_1.default.findOne({ title });
         if (existingBook) {
             return res.status(409).json({ message: 'Book already exists in the bookshelf' });
         }
         // If no existing book is found, proceed to add the new book
-        const newBook = new Books_js_1.default({ title, description, image });
+        const newBook = new Books_1.default({ title, description, image });
         yield newBook.save();
         res.status(201).json(newBook);
     }
@@ -41,7 +41,7 @@ exports.router.put('/update/:id', (req, res) => __awaiter(void 0, void 0, void 0
     const { id } = req.params;
     const { readStatus } = req.body;
     try {
-        const updatedBook = yield Books_js_1.default.findByIdAndUpdate(id, { readStatus }, { new: true });
+        const updatedBook = yield Books_1.default.findByIdAndUpdate(id, { readStatus }, { new: true });
         if (!updatedBook) {
             return res.status(404).send('Book not found');
         }
@@ -55,7 +55,7 @@ exports.router.put('/update/:id', (req, res) => __awaiter(void 0, void 0, void 0
 // Endpoint to get all books in the bookshelf
 exports.router.get('/all', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const books = yield Books_js_1.default.find({});
+        const books = yield Books_1.default.find({});
         res.json(books);
     }
     catch (error) {
@@ -66,7 +66,7 @@ exports.router.get('/all', (req, res) => __awaiter(void 0, void 0, void 0, funct
 exports.router.delete('/delete/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        const deletedBook = yield Books_js_1.default.findByIdAndDelete(id);
+        const deletedBook = yield Books_1.default.findByIdAndDelete(id);
         if (!deletedBook) {
             return res.status(404).send('Book not found');
         }

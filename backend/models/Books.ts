@@ -1,18 +1,23 @@
-// models/Book.ts
-import mongoose, { Document, Schema } from 'mongoose';
+import { Document, model, Schema } from 'mongoose';
 
-export interface Book extends Document {
+// Define interface for Book
+export interface Book {
   title: string;
-  description: string;
-  image: string;
-  readStatus: boolean;
+  description?: string;
+  image?: string;
+  readStatus?: boolean;
 }
 
-const bookSchema = new Schema({
-  title: { type: String, required: true, unique: true },
-  description: { type: String, required: true },
-  image: { type: String, required: true },
+// Define Mongoose schema for Book
+const bookSchema = new Schema<Book>({
+  title: { type: String, required: true },
+  description: { type: String },
+  image: { type: String },
   readStatus: { type: Boolean, default: false }
 });
 
-export default mongoose.model<Book>('Book', bookSchema);
+// Define and export Mongoose model for Book
+export default model<Book>('Book', bookSchema);
+
+// Define and export BookDocument type based on Mongoose Document
+export type BookDocument = Document & Book;
