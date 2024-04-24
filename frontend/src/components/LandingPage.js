@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // if using React Router
 import '../styles/LandingPage.module.css'; // Path to your CSS file
 
 const StartPage = () => {
@@ -15,9 +14,6 @@ const StartPage = () => {
       <h1>Welcome to LitQuest</h1>
       <p>Manage your book list with ease</p>
       <p>Find your next literary adventure efficiently</p>
-      <div className="start-buttons">
-        <Link to="/NovelsPage" className="btn btn-outline-primary">Sign In</Link>
-      </div>
     </div>
     </div>
   );

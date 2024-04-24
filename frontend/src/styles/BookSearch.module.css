@@ -9,7 +9,7 @@
     font-weight:bold;
   }
   .book-search-container {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: var(--secondary-color);
     min-height: 100%;
     padding: 20px;

@@ -44,14 +44,6 @@ function App() {
 					onSignUpClicked={() => setShowSignUpModal(true)}
 					onLogoutSuccessful={() => setLoggedInUser(null)}
 				/>
-          <Navbar.Brand as={Link} to="/">LitQuest</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ml-auto">
-              <Nav.Link as={Link} to="/search" style={{ color: 'var(--secondary-color)' }}>Book Search</Nav.Link>
-              <Nav.Link as={Link} to="/bookshelf" style={{ color: 'var(--secondary-color)' }}>My Bookshelf</Nav.Link>
-            </Nav>
-        </Navbar.Collapse>
 				<Container>
 					<Routes>
 					<Route
@@ -59,7 +51,7 @@ function App() {
 							element={<StartPage />}
 						/>
 						<Route
-							path='/signup'
+							path='/reviews'
 							element={<NovelsPage loggedInUser={loggedInUser} />}
 						/>
 						<Route
@@ -67,7 +59,7 @@ function App() {
 							element={<BookSearch />}
 						/>
 						<Route
-							path='/BookShelf'
+							path='/bookshelf'
 							element={<BookshelfDisplay />}
 						/>
 						<Route

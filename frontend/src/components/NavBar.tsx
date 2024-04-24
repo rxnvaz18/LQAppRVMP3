@@ -2,6 +2,7 @@ import { Container, Navbar, Nav } from "react-bootstrap"
 import { User } from "../models/user"
 import NavBarLoggedIn from "./NavBarLoggedIn"
 import NavBarLoggedOut from "./NavBarLoggedOut"
+import { Link } from 'react-router-dom'
 
 interface NavBarProps {
     loggedInUser: User | null,
@@ -13,9 +14,7 @@ const NavBar = ({loggedInUser, onSignUpClicked, onLoginClicked, onLogoutSuccessf
     return ( 
         <Navbar bg="var(--primary-colors)" variant="dark" expand="lg" sticky="top">
         <Container>
-            <Navbar.Brand>
-                LitQuest App
-            </Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">LitQuest</Navbar.Brand>
             <Navbar.Toggle aria-controls="main-navbar"/>
             <Navbar.Collapse id="main-navbar">
                 <Nav className="ms-auto">
@@ -27,6 +26,6 @@ const NavBar = ({loggedInUser, onSignUpClicked, onLoginClicked, onLogoutSuccessf
             </Navbar.Collapse>
         </Container>
         </Navbar>
-    ) 
+) 
 }
 export default NavBar
