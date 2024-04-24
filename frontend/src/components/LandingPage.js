@@ -1,20 +1,17 @@
 import React from 'react';
-import '../styles/LandingPage.module.css'; // Path to your CSS file
+import styles from '../styles/LandingPage.module.css';
 
 const StartPage = () => {
   return (
-    <div style={{ backgroundColor: 'var(--secondary-color)', width: '100%', height: '100vh' }}>
-    <div className="start-page">
-      <div className="logo">
-        {<div className="logo">
-  <img src="/LQLogo.png" alt="LitQuest Logo" />
-</div>
-}
+    <div className={styles["start-page_container"]}>
+      <div className={styles["start-page"]}>
+        <div className={styles["logo"]}>
+          <img src="/LQLogo.png" alt="LitQuest Logo" />
+        </div>
+        <h1>Welcome to LitQuest</h1>
+        <p>Manage your book list with ease</p>
+        <p>Find your next literary adventure efficiently</p>
       </div>
-      <h1>Welcome to LitQuest</h1>
-      <p>Manage your book list with ease</p>
-      <p>Find your next literary adventure efficiently</p>
-    </div>
     </div>
   );
 };

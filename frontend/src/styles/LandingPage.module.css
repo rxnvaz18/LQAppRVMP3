@@ -4,52 +4,23 @@
     --third-color: #FFE25Fff;
   }
 
-  .start-page {
-      text-align: center;
-      padding: 30px; /* Adjust as needed for your layout */
-      background-color: var(--secondary-color);
-      justify-content: center;
-      margin: 0 auto;
-    }
-  .start-page-container {
-      background-color: var(--secondary-color);
-    }
-    
-  .start-page h1 {
-    background-color: var(--secondary-color);
-      margin-top: 20px;
-      color: var(--primary-color);
-      font-family: 'Noto Serif', serif;
-      font-weight:bold;
-    text-align: center;
+  .start-page_container {
+    display: flex;
     justify-content: center;
-    padding: 50px; /* Adjust as needed for your layout */
-    font-size: 2.5vw; /* responsive font size, adjusts with the width of the viewport */
-  }
-  
-  .start-page .logo img {
-    width: 30vw; /* 30% of the viewport width */
-    height: auto; /* maintain the aspect ratio */
-    max-width: 100%; /* ensure it doesn't overflow its container */
-  }
-  
-  .start-page p {
+    align-items: center;
+    height: 100vh; /* Set height to fill the viewport */
     background-color: var(--secondary-color);
-    margin: 10px 0;
-    font-size: 1.5vw; /* responsive font size, adjusts with the width of the viewport */
   }
   
-  .start-buttons {
-    margin-top: 30px;
+  .start-page {
+    text-align: center;
   }
   
-  .start-buttons .btn {
-    margin: 10px;
-    padding: 1vw 2vw; /* responsive padding, adjusts with the width of the viewport */
-    font-size: 1.2vw; /* responsive font size, adjusts with the width of the viewport */
-    /* Add other button styles here */
+  .start-page .logo {
+    margin-bottom: 20px; /* Optional: Adjust margin for logo */
   }
   
+
   /* Media queries for larger screens */
   @media (min-width: 600px) {
     .start-page .logo img {

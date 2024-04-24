@@ -13,6 +13,7 @@ const app = express()
 
 // Middleware to parse json bodies
 app.use(express.json())
+
 // Middleware
 app.use(cors());
 
