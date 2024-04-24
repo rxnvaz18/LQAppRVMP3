@@ -80,8 +80,162 @@ Params: id (string) - The ID of the book to delete.
 Response: A JSON object of the deleted book.
 Example: DELETE /bookshelf/delete/123456789
 
+### Book Reviews
+- **HTTP Method:** GET
+- **Path:** `/api/novels`
+- **Description:** Retrieves a list of all novels with their reviews.
+ -Request Parameters:None
+-Response: Status Code: 200 OK
+-Response Body Example:
+```json
+[
+  {
+    "id": "1",
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "J.K. Rowling",
+    "reviews": [
+      {
+        "id": "1",
+        "rating": 5,
+        "comment": "Excellent book!"
+      },
+      {
+        "id": "2",
+        "rating": 4,
+        "comment": "Enjoyable read."
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "reviews": [
+      {
+        "id": "3",
+        "rating": 5,
+        "comment": "A classic!"
+      }
+    ]
+  }
+]
+```
+
+#### Retrieve a Specific Review
+-**HTTP Method:** GET
+-**Path:** `/api/novels/:novelId`
+-**Description:** Retrieves details of a specific novel identified by novelId.
+-Request Parameters:
+    novelId (path parameter): ID of the novel to retrieve.
+-Response: Status Code: 200 OK
+-Response Body Example:
+
+```json
+{
+  "id": "1",
+  "title": "Harry Potter and the Sorcerer's Stone",
+  "author": "J.K. Rowling",
+  "reviews": [
+    {
+      "id": "1",
+      "rating": 5,
+      "comment": "Excellent book!"
+    },
+    {
+      "id": "2",
+      "rating": 4,
+      "comment": "Enjoyable read."
+    }
+  ]
+  ```
+#### Create a New Novel Review
+-**HTTP Method:** POST
+-**Path:** /api/novels
+-**Description:** Creates a new novel review.
+-Request Body Example: 
+```json
+{
+  "title": "The Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "reviews": [
+    {
+      "rating": 4,
+      "comment": "Classic novel!"
+    }
+  ]
+}
+```
+-Response Example: Status Code: 201 Created
+Response Body Example:
+```json
+{
+  "id": "3",
+  "title": "The Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "reviews": [
+    {
+      "id": "4",
+      "rating": 4,
+      "comment": "Classic novel!"
+    }
+  ]
+}
+```
+
+#### Update an Existing Novel Review
+-**HTTP Method:** PATCH
+-**Path:** /api/novels/:novelId
+-**Description:** Updates an existing novel review identified by novelId
+-Request Parameters: `novelId (path parameter): ID of the novel to update.
+-Request Body Example:
+```json
+{
+  "title": "The Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "reviews": [
+    {
+      "id": "4",
+      "rating": 5,
+      "comment": "A timeless classic!"
+    }
+  ]
+}
+```
+-Response: Status Code: 200 OK
+-Response Body Example:
+```json
+{
+  "id": "3",
+  "title": "The Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "reviews": [
+    {
+      "id": "4",
+      "rating": 5,
+      "comment": "A timeless classic!"
+    }
+  ]
+}
+```
+#### Delete a Novel Review
+-**HTTP Method:** DELETE
+-**Path:** /api/novels/:novelId
+-**Description:** Deletes a novel review identified by novelId.
+-Request Parameters: `novelId` (path parameter): ID of the novel to delete.
+-Response: Status Code: 200 OK
+-Response Body Example: 
+```json
+{
+  "message": "Novel review deleted successfully"
+}
+```
+
+
+
 ## Author
 This LitQuest App version 2.0 has been created by Roxana Vazquez
+### Future Plans
+This author hopes to use their newfound skills to become a frontend developer within the neuroscience community and that these skills will aid in their future research.
 
 ## Acknowledgements
 LitQuest version 2.0 is a project submitted by Roxana for their final SDSU Coding bootcamp milestone project. With the help of all of Thrive DX's instructors and the course content, Roxana was able to develop a stylish and functional book reading app with inspiration taken from Good Reads. 
