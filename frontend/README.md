@@ -1,46 +1,243 @@
-# Getting Started with Create React App
+# LQAppRVMP3
+A new and improved book reading list to track your literature consumption. Like a virtual bookshelf it has been updated with a login feature and a book review section.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [API_Endpoints](#API_Endpoints)
+- [Author](#author)
+- [Acknowledgements](#acknowledgements)
 
-## Available Scripts
+## Installation
+1. Clone the repository
+2. Install dependencies using `npm install`
+3. Configure environmental variables in `.env` file
+4. Start server using `npm start`
 
-In the project directory, you can run:
+## Usage
 
-### `npm start`
+1. Open the application in your web browser.
+2. Sign up for an account or log in if you already have one.
+3. Search for a book of your choice within the search bar on the landing page.
+4. Add the book of your choice to your bookshelf.
+5. Embark on your reading journey and check books you have read to update your reading list. 
+6. After reading a book, add a review or notes in your book reviews section.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## API Endpoints
+This document outlines the API endpoints provided by the server for managing books in a bookshelf.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Retrieve Users 
+- **HTTP Method:** GET 
+- **Path:** `/api/users`
+- **Description:** Retrieves a list of all users.
 
-### `npm test`
+### Search Books
+- **HTTP Method:** GET 
+- **Path:** `/api/search`
+- **Description:** Search for books via the Google Books API.
+Query Params: query (string) - The search query term or phrase.
+Response: A JSON array of books, each with a title and description.
+Example: GET /api/search?query=Harry+Potter
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Bookshelf
+- **HTTP Method:** POST 
+- **Path:** `/bookshelf/add`
+- **Description:**Add a new book to the bookshelf.
+Body: A JSON object containing the book details (title, description, etc.).
+Response: A JSON object of the added book.
+Example:
+POST /bookshelf/add
+```json
+{
+  "title": "The Hobbit",
+  "description": "A fantasy novel by J.R.R. Tolkien."
+}
+```
 
-### `npm run build`
+#### Update Read Status
+- **HTTP Method:** PUT
+- **Path:** `/bookshelf/update/:id`
+- **Description:** Update the read status of a book in the bookshelf.
+Params: id (string) - The ID of the book to update.
+Body: A JSON object containing the new read status (readStatus).
+Response: A JSON object of the updated book.
+Example:
+PUT /bookshelf/update/123456789
+```json
+{
+  "readStatus": true
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Get All Books
+- **HTTP Method:** GET
+- **Path:** `/bookshelf/all`
+- **Description:**Retrieve all books from the bookshelf.
+Response: A JSON array of all books in the bookshelf.
+Example: GET /bookshelf/all
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Delete a Book
+- **HTTP Method:** DELETE
+- **Path:** `/bookshelf/delete/:id`
+- **Description:** Remove a book from the bookshelf.
+Params: id (string) - The ID of the book to delete.
+Response: A JSON object of the deleted book.
+Example: DELETE /bookshelf/delete/123456789
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Book Reviews
+- **HTTP Method:** GET
+- **Path:** `/api/novels`
+- **Description:** Retrieves a list of all novels with their reviews.
+ -Request Parameters:None
+-Response: Status Code: 200 OK
+-Response Body Example:
+```json
+[
+  {
+    "id": "1",
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "J.K. Rowling",
+    "reviews": [
+      {
+        "id": "1",
+        "rating": 5,
+        "comment": "Excellent book!"
+      },
+      {
+        "id": "2",
+        "rating": 4,
+        "comment": "Enjoyable read."
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "reviews": [
+      {
+        "id": "3",
+        "rating": 5,
+        "comment": "A classic!"
+      }
+    ]
+  }
+]
+```
 
-### `npm run eject`
+#### Retrieve a Specific Review
+-**HTTP Method:** GET
+-**Path:** `/api/novels/:novelId`
+-**Description:** Retrieves details of a specific novel identified by novelId.
+-Request Parameters:
+    novelId (path parameter): ID of the novel to retrieve.
+-Response: Status Code: 200 OK
+-Response Body Example:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```json
+{
+  "id": "1",
+  "title": "Harry Potter and the Sorcerer's Stone",
+  "author": "J.K. Rowling",
+  "reviews": [
+    {
+      "id": "1",
+      "rating": 5,
+      "comment": "Excellent book!"
+    },
+    {
+      "id": "2",
+      "rating": 4,
+      "comment": "Enjoyable read."
+    }
+  ]
+  ```
+#### Create a New Novel Review
+-**HTTP Method:** POST
+-**Path:** /api/novels
+-**Description:** Creates a new novel review.
+-Request Body Example: 
+```json
+{
+  "title": "The Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "reviews": [
+    {
+      "rating": 4,
+      "comment": "Classic novel!"
+    }
+  ]
+}
+```
+-Response Example: Status Code: 201 Created
+Response Body Example:
+```json
+{
+  "id": "3",
+  "title": "The Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "reviews": [
+    {
+      "id": "4",
+      "rating": 4,
+      "comment": "Classic novel!"
+    }
+  ]
+}
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Update an Existing Novel Review
+-**HTTP Method:** PATCH
+-**Path:** /api/novels/:novelId
+-**Description:** Updates an existing novel review identified by novelId
+-Request Parameters: `novelId (path parameter): ID of the novel to update.
+-Request Body Example:
+```json
+{
+  "title": "The Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "reviews": [
+    {
+      "id": "4",
+      "rating": 5,
+      "comment": "A timeless classic!"
+    }
+  ]
+}
+```
+-Response: Status Code: 200 OK
+-Response Body Example:
+```json
+{
+  "id": "3",
+  "title": "The Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "reviews": [
+    {
+      "id": "4",
+      "rating": 5,
+      "comment": "A timeless classic!"
+    }
+  ]
+}
+```
+#### Delete a Novel Review
+-**HTTP Method:** DELETE
+-**Path:** /api/novels/:novelId
+-**Description:** Deletes a novel review identified by novelId.
+-Request Parameters: `novelId` (path parameter): ID of the novel to delete.
+-Response: Status Code: 200 OK
+-Response Body Example: 
+```json
+{
+  "message": "Novel review deleted successfully"
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Author
+This LitQuest App version 2.0 has been created by Roxana Vazquez
+### Future Plans
+This author hopes to use their newfound skills to become a frontend developer within the neuroscience community and that these skills will aid in their future research pursuits.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Acknowledgements
+LitQuest version 2.0 is a project submitted by Roxana for their final SDSU Coding bootcamp milestone project. With the help of all of Thrive DX's instructors and the course content, Roxana was able to develop a stylish and functional book reading app with inspiration taken from Good Reads. 
