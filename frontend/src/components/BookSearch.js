@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Spinner from 'react-bootstrap/Spinner';
-import './BookSearch.css';
+import '../styles/BookSearch.module.css';
 import { BsSearch } from "react-icons/bs";
 
 function BookSearch() {

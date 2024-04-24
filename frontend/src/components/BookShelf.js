@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Container, Row, Col, Spinner, Button } from 'react-bootstrap';
-import './BookShelf.css';
+import '../styles/BookShelf.module.css';
 
 function BookshelfDisplay() {
     const [books, setBooks] = useState([]);

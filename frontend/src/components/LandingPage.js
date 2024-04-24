@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // if using React Router
-import './LandingPage.css'; // Path to your CSS file
+import '../styles/LandingPage.module.css'; // Path to your CSS file
 
 const StartPage = () => {
   return (
@@ -16,8 +16,7 @@ const StartPage = () => {
       <p>Manage your book list with ease</p>
       <p>Find your next literary adventure efficiently</p>
       <div className="start-buttons">
-        <Link to="/search" className="btn btn-primary">Book Search</Link>
-        <Link to="/bookshelf" className="btn btn-outline-primary">My Bookshelf</Link>
+        <Link to="/NovelsPage" className="btn btn-outline-primary">Sign In</Link>
       </div>
     </div>
     </div>
