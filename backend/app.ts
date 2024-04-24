@@ -1,16 +1,18 @@
 import "dotenv/config"
-import express, { NextFunction, Request, Response } from 'express'
 import session from "express-session"
 import MongoStore from "connect-mongo"
 import userRoutes from "./routes/Users"
 import novelsRoutes from "./routes/novels"
-import bookshelfRoutes from "./routes/bookshelf"
 import { requiresAuth } from "./middleware/authMiddleware"
+import cors from "cors"
+import express, { json, NextFunction, Request, Response } from 'express';
 
 const app = express()
 
 // Middleware to parse json bodies
-app.use(express.json());
+app.use(express.json())
+// Middleware
+app.use(cors());
 
 // Configure session middleware
 const sessionSecret = process.env.SESSION_SECRET; // Retrieve SESSION_SECRET from environment variables
@@ -34,7 +36,7 @@ app.use(session({
 
 app.use("/api/users", userRoutes)
 app.use("/api/novels", requiresAuth, novelsRoutes)
-app.use("/api/bookshelf", requiresAuth, bookshelfRoutes)
+
 
 app.use((req, res, next) => {
     next(Error("Endpoint not found"))

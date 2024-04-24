@@ -4,16 +4,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv/config");
-const express_1 = __importDefault(require("express"));
 const express_session_1 = __importDefault(require("express-session"));
 const connect_mongo_1 = __importDefault(require("connect-mongo"));
 const Users_1 = __importDefault(require("./routes/Users"));
 const novels_1 = __importDefault(require("./routes/novels"));
 const bookshelf_1 = __importDefault(require("./routes/bookshelf"));
 const authMiddleware_1 = require("./middleware/authMiddleware");
+const cors_1 = __importDefault(require("cors"));
+const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 // Middleware to parse json bodies
 app.use(express_1.default.json());
+// Middleware
+app.use((0, cors_1.default)());
 // Configure session middleware
 const sessionSecret = process.env.SESSION_SECRET; // Retrieve SESSION_SECRET from environment variables
 if (!sessionSecret) {
