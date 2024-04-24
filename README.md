@@ -4,7 +4,7 @@ A new and improved book reading list to track your literature consumption. Like 
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
--[API_Endpoints](#API_Endpoints)
+- [API_Endpoints](#API_Endpoints)
 - [Author](#author)
 - [Acknowledgements](#acknowledgements)
 
@@ -47,10 +47,12 @@ Body: A JSON object containing the book details (title, description, etc.).
 Response: A JSON object of the added book.
 Example:
 POST /bookshelf/add
+```json
 {
   "title": "The Hobbit",
   "description": "A fantasy novel by J.R.R. Tolkien."
 }
+```
 
 #### Update Read Status
 - **HTTP Method:** PUT
@@ -61,9 +63,11 @@ Body: A JSON object containing the new read status (readStatus).
 Response: A JSON object of the updated book.
 Example:
 PUT /bookshelf/update/123456789
+```json
 {
   "readStatus": true
 }
+```
 
 #### Get All Books
 - **HTTP Method:** GET
@@ -229,8 +233,6 @@ Response Body Example:
   "message": "Novel review deleted successfully"
 }
 ```
-
-
 
 ## Author
 This LitQuest App version 2.0 has been created by Roxana Vazquez
