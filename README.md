@@ -242,7 +242,7 @@ Response Body Example:
 ## Author
 This LitQuest App version 2.0 has been created by Roxana Vazquez
 ### Future Plans
-This author hopes to use their newfound skills to become a frontend developer within the neuroscience community and that these skills will aid in their future research pursuits.
+To improve app features to have the application be more engagin, for example adding a tier list based on books read by user. Another possible route is to incorporate the feature to be able to see other user's reviews of books. 
 
 ## Acknowledgements
 LitQuest version 2.0 is a project submitted by Roxana for their final SDSU Coding bootcamp milestone project. With the help of all of Thrive DX's instructors and the course content, Roxana was able to develop a stylish and functional book reading app with inspiration taken from Good Reads. 
