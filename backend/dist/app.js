@@ -13,11 +13,26 @@ const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const bookShelf_1 = require("./controllers/bookShelf");
 const search_1 = __importDefault(require("./routes/search"));
+const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
 // Middleware to parse json bodies
 app.use(express_1.default.json());
 // Middleware
 app.use((0, cors_1.default)());
+app.use(express_1.default.static('./build'));
+// Render client for any path
+app.get('/', (req, res) => {
+    const options = {
+        root: path_1.default.join(__dirname, '../frontend/build'),
+        headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+        }
+    };
+    res.sendFile('index.html', options, (err) => {
+        console.log(err);
+    });
+});
 // Configure session middleware
 const sessionSecret = process.env.SESSION_SECRET; // Retrieve SESSION_SECRET from environment variables
 if (!sessionSecret) {
@@ -39,7 +54,9 @@ app.use("/api/users", Users_1.default);
 app.use("/api/novels", authMiddleware_1.requiresAuth, novels_1.default);
 app.use('/bookshelf', authMiddleware_1.requiresAuth, bookShelf_1.router);
 app.use('/api/search', search_1.default);
-app.use((req, res, next) => {
-    next(Error("Endpoint not found"));
+// Global error handler
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(404).send(err.message || 'Not Found');
 });
 exports.default = app;

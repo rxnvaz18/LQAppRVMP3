@@ -26,7 +26,8 @@
     "react-hook-form": "^7.51.3"
   },
   "scripts": {
-    "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' server.ts"
+    "start": "nodemon server.ts",
+    "build": "cd ../frontend && npm run build && cd ../backend && tsc"
   },
   "version": "1.0.0",
   "main": "dist/server.js",

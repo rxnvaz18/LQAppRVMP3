@@ -8,6 +8,7 @@ import cors from "cors"
 import express, { json, NextFunction, Request, Response } from 'express'
 import { router as bookshelfRouter } from "./controllers/bookShelf"
 import searchRouter from './routes/search';
+import path from 'path'
 
 const app = express()
 
@@ -16,7 +17,23 @@ app.use(express.json())
 
 // Middleware
 app.use(cors());
+app.use(express.static('./build'))
 
+// Render client for any path
+app.get('/', (req, res) => {
+  const options = {
+       root: path.join(__dirname, '../frontend/build'),
+       headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+       }
+  }
+
+  res.sendFile('index.html', options, (err) => {
+    console.log(err)
+  });
+
+})
 // Configure session middleware
 const sessionSecret = process.env.SESSION_SECRET; // Retrieve SESSION_SECRET from environment variables
 
@@ -43,9 +60,6 @@ app.use("/api/novels", requiresAuth, novelsRoutes)
 app.use('/bookshelf', requiresAuth, bookshelfRouter)
 app.use('/api/search', searchRouter)
 
-app.use((req, res, next) => {
-  next(new Error("Endpoint not found"));
-});
 
 // Global error handler
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
