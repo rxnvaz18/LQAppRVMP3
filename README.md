@@ -3,6 +3,7 @@ A new and improved book reading list to track your literature consumption. Like 
 
 ## Table of Contents
 - [Installation](#installation)
+- [Tech Stack](#Tech Stack)
 - [Usage](#usage)
 - [API_Endpoints](#API_Endpoints)
 - [Author](#author)
@@ -13,6 +14,10 @@ A new and improved book reading list to track your literature consumption. Like 
 2. Install dependencies using `npm install`
 3. Configure environmental variables in `.env` file
 4. Start server using `npm start`
+
+## Tech Stack
+This application is a full stack MERN application using MongoAtlas for database management, Express.js and React.js for the backend and frontend frameworks part of the application development.
+LQAppRVMP3 also used Node.js for the javascript runtime environment.
 
 ## Usage
 
