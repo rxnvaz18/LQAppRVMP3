@@ -4,6 +4,24 @@ import mongoose from 'mongoose';
 import fs from 'fs'
 import path from 'path'
 
+const express = require('express')
+
+app.use(express.static('./build'))
+
+// Render client for any path
+app.get('/', (req, res) => {
+  const options = {
+       root: path.join(__dirname, './build'),
+       dotfiles: 'ignore',
+       headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+       }
+  };
+  res.sendFile('index.html', options);
+
+})
+
 // debugging env file path
 const envPath = path.resolve(__dirname, './.env')
 if (fs.existsSync(envPath)) {
