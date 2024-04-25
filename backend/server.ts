@@ -1,23 +1,33 @@
+const dotenv = require("dotenv").config();
 import app from "./app"
-import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import fs from 'fs'
 import path from 'path'
+import cors from 'cors'
+const express = require("express");
 
-// debugging env file path
-const envPath = path.resolve(__dirname, './.env')
-if (fs.existsSync(envPath)) {
-  console.log('.env file found at:', envPath);
+app.use(express.urlencoded({ extended: false }));
+
+app.use(cors());
+
+// app.use(cors({
+//   origin: ["http://localhost:5000", "https://LQApp2.onrender.com"]
+// }));
+
+// Load React App in production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(
+      path.resolve(__dirname, "../", "frontend", "build", "index.html")
+    )
+  );
 } else {
-  console.error('.env file not found at:', envPath);
+  app.get("/", (req, res) => {
+    res.send("Welcome to the home page");
+  });
 }
 
-const result = dotenv.config({ path: envPath });
-
-if (result.error) {
-  console.error('Error loading .env file:', result.error);
-  process.exit(1); // Exit with error
-}
 
 // Now you can access environment variables via process.env
 const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
